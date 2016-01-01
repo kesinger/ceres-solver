@@ -198,7 +198,7 @@ void OrderingForSparseNormalCholeskyUsingEigenSparse(
   const SparseMatrix block_hessian =
       block_jacobian.transpose() * block_jacobian;
 
-  Eigen::AMDOrdering<int> amd_ordering;
+  Eigen::NaturalOrdering<int> amd_ordering;
   Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic, int> perm;
   amd_ordering(block_hessian, perm);
   for (int i = 0; i < block_hessian.rows(); ++i) {
@@ -414,7 +414,7 @@ void MaybeReorderSchurComplementColumnsUsingEigen(
   const SparseMatrix block_schur_complement =
       F.transpose() * F - F.transpose() * E * E.transpose() * F;
 
-  Eigen::AMDOrdering<int> amd_ordering;
+  Eigen::NaturalOrdering<int> amd_ordering;
   Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic, int> perm;
   amd_ordering(block_schur_complement, perm);
 

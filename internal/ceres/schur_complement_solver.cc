@@ -566,7 +566,7 @@ SparseSchurComplementSolver::SolveReducedLinearSystemUsingEigen(
     simplicial_ldlt_->analyzePattern(eigen_lhs);
     if (VLOG_IS_ON(2)) {
       std::stringstream ss;
-      simplicial_ldlt_->dumpMemory(ss);
+//      simplicial_ldlt_->dumpMemory(ss);
       VLOG(2) << "Symbolic Analysis\n"
               << ss.str();
     }

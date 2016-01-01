@@ -45,7 +45,7 @@
 #include "ceres/cxsparse.h"
 
 #ifdef CERES_USE_EIGEN_SPARSE
-#include "Eigen/SparseCholesky"
+#include "Eigen/SparseQR"
 #endif
 
 namespace ceres {
@@ -96,13 +96,13 @@ class SparseNormalCholeskySolver : public CompressedRowSparseMatrixSolver {
   // before version 3.2.2, Eigen did not support a third template
   // parameter to specify the ordering.
 #if EIGEN_VERSION_AT_LEAST(3,2,2)
-  typedef Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>, Eigen::Upper,
+  typedef Eigen::SparseQR<Eigen::SparseMatrix<double>, //Eigen::Upper,
                                 Eigen::NaturalOrdering<int> >
   SimplicialLDLTWithNaturalOrdering;
   scoped_ptr<SimplicialLDLTWithNaturalOrdering> natural_ldlt_;
 
-  typedef Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>, Eigen::Upper,
-                                Eigen::AMDOrdering<int> >
+  typedef Eigen::SparseQR<Eigen::SparseMatrix<double>, //Eigen::Upper,
+                                Eigen::NaturalOrdering<int> >
   SimplicialLDLTWithAMDOrdering;
   scoped_ptr<SimplicialLDLTWithAMDOrdering> amd_ldlt_;
 

@@ -49,8 +49,9 @@
 #include "ceres/block_random_access_diagonal_matrix.h"
 
 #ifdef CERES_USE_EIGEN_SPARSE
-#include "Eigen/SparseCholesky"
+//#include "Eigen/SparseCholesky"
 #include "Eigen/OrderingMethods"
+#include "Eigen/SparseQR"
 #endif
 
 namespace ceres {
@@ -205,7 +206,7 @@ class SparseSchurComplementSolver : public SchurComplementSolver {
   // before version 3.2.2, Eigen did not support a third template
   // parameter to specify the ordering.
 #if EIGEN_VERSION_AT_LEAST(3,2,2)
-  typedef Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>, Eigen::Lower,
+  typedef Eigen::SparseQR<Eigen::SparseMatrix<double>, //Eigen::Lower,
                                 Eigen::NaturalOrdering<int> >
   SimplicialLDLT;
 #else

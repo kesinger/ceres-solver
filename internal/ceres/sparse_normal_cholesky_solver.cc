@@ -47,7 +47,7 @@
 #include "Eigen/SparseCore"
 
 #ifdef CERES_USE_EIGEN_SPARSE
-#include "Eigen/SparseCholesky"
+#include "Eigen/SparseQR"
 #endif
 
 namespace ceres {
@@ -74,7 +74,7 @@ LinearSolver::Summary SimplicialLDLTSolve(
     solver->analyzePattern(lhs);
     if (VLOG_IS_ON(2)) {
       std::stringstream ss;
-      solver->dumpMemory(ss);
+   //   solver->dumpMemory(ss);
       VLOG(2) << "Symbolic Analysis\n"
               << ss.str();
     }
@@ -267,7 +267,7 @@ LinearSolver::Summary SparseNormalCholeskySolver::SolveImplUsingEigen(
         A->mutable_values());
 
     Eigen::SparseMatrix<double> lhs = a.transpose() * a;
-    Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > solver;
+    Eigen::SparseQR<Eigen::SparseMatrix<double>, Eigen::NaturalOrdering<int> > solver;
     return SimplicialLDLTSolve(lhs,
                                true,
                                &solver,
