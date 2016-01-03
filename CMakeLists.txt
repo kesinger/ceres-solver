@@ -803,7 +803,7 @@ install(FILES "${CMAKE_BINARY_DIR}/CeresConfigVersion.cmake"
 configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/uninstall.cmake.in"
                "${CMAKE_BINARY_DIR}/cmake/uninstall.cmake"
                @ONLY)
-add_custom_target(uninstall
+add_custom_target(uninstall_ceres
                   COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/cmake/uninstall.cmake)
 
 # Install method #2: Put Ceres build into local CMake registry.
