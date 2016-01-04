@@ -29,7 +29,7 @@
 // Author: keir@google.com (Keir Mierle)
 
 #include "glog/logging.h"
-
+#include <set>
 namespace google {
 
 // This is the set of log sinks. This must be in a separate library to ensure
